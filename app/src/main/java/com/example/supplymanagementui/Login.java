@@ -77,12 +77,8 @@ public class Login extends AppCompatActivity {
                     edtTxtPassword.requestFocus();
                 }else{
 
-                    jsonParse();
-//                    MainActivity.loggedIn = true;
-//                    Intent intent = new Intent(Login.this, MainActivity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    finish();
-//                    startActivity(intent);
+                    jsonParse(uName,pass);
+//
                 }
                 //login data validation end
 
@@ -97,14 +93,14 @@ public class Login extends AppCompatActivity {
 
 
 
-    private void jsonParse(){
+    private void jsonParse(String user,String pass){
         final ProgressDialog progressDialog = new ProgressDialog(Login.this);
         progressDialog.setTitle("Loading");
         progressDialog.setMessage("");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String url = "http://192.168.8.167:5000/user/sam/sam";
+        String url = "http://192.168.8.167:5000/user/"+user+"/"+pass;
         Log.d(TAG,"JSON URL"+url);
         JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -116,8 +112,16 @@ public class Login extends AppCompatActivity {
 
                             Boolean message = response.getBoolean("status");
                             Log.d(TAG,"JSON RESULT"+message.toString());
-
-
+                            if(message){
+                                MainActivity.loggedIn = true;
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                finish();
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
+                            }
+                            progressDialog.hide();
                         }catch (JSONException e) {
                             e.printStackTrace();
                             Log.d(TAG,"JSON RESULT"+e.toString());

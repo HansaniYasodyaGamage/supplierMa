@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SupplyManagementUI"
         android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         >
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <activity
             android:name=".AddOrder3"
             android:label="Add Order"/>
