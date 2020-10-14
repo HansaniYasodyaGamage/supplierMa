@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, Login.class);
+                    Intent intent = new Intent(MainActivity.this, AddOrder.class);
                     startActivity(intent);
 
                 }
