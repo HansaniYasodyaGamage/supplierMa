@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -22,6 +23,11 @@ import android.widget.Toast;
 public class Login extends AppCompatActivity {
 
     Button btnLogin;
+    EditText edtTxtEmail;
+    EditText edtTxtPassword;
+
+    String uName;
+    String pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +43,36 @@ public class Login extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        edtTxtEmail = findViewById(R.id.edtTxtEmail);
+        edtTxtPassword = findViewById(R.id.edtTxtPassword);
+
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.loggedIn = true;
-                Intent intent = new Intent(Login.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                finish();
-                startActivity(intent);
+
+                //login data validation start
+                uName = edtTxtEmail.getText().toString();
+                pass = edtTxtPassword.getText().toString();
+
+
+                if(uName.isEmpty()){
+                    edtTxtEmail.setError("Please provide a email");
+                    edtTxtEmail.requestFocus();
+                }else if(pass.isEmpty()){
+                    edtTxtPassword.setError("Please provide a password");
+                    edtTxtPassword.requestFocus();
+                }else{
+                    MainActivity.loggedIn = true;
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    finish();
+                    startActivity(intent);
+                }
+                //login data validation end
+
+
+
 
             }
         });
