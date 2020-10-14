@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:hint="Quantity"
             android:paddingBottom="18dp" />
 
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:hint="Unit Price"
             android:paddingBottom="18dp" />
 
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:hint="Total"
             android:paddingBottom="18dp" />
 
