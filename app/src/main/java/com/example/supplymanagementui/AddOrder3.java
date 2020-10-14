@@ -2,6 +2,7 @@ package com.example.supplymanagementui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AddOrder3 extends AppCompatActivity {
 
@@ -23,6 +34,10 @@ public class AddOrder3 extends AppCompatActivity {
     String quantity;
     String unitPrice;
     String total;
+
+    String TAG = "AddOrder3.java";
+
+    private RequestQueue loginQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +110,55 @@ public class AddOrder3 extends AppCompatActivity {
             String j =(String) b.get("supplier");
             Toast.makeText(AddOrder3.this, j + "was selected", Toast.LENGTH_SHORT).show();
         }
+        loginQueue = Volley.newRequestQueue(AddOrder3.this);
+    }
+
+
+
+    private void jsonParse(String user,String pass){
+        final ProgressDialog progressDialog = new ProgressDialog(AddOrder3.this);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        String url = "http://192.168.8.167:5000/user/"+user+"/"+pass;
+        Log.d(TAG,"JSON URL"+url);
+        JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG,"JSON RESULT"+response.toString());
+                        try{
+
+
+                            Boolean message = response.getBoolean("status");
+                            Log.d(TAG,"JSON RESULT"+message.toString());
+                            if(message){
+                                MainActivity.loggedIn = true;
+                                Intent intent = new Intent(AddOrder3.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                finish();
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(AddOrder3.this, "Login failed", Toast.LENGTH_SHORT).show();
+                            }
+                            progressDialog.hide();
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG,"JSON RESULT"+e.toString());
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+
+        });
+        loginQueue.add(loginRequest);
 
     }
 }
