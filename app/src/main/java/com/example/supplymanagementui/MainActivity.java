@@ -19,8 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Check shared preferences
         if(!loggedIn){
-            loggedIn = true;
             Intent intent = new Intent(MainActivity.this, Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            finish();
             startActivity(intent);
         }else {
             cardView = findViewById(R.id.addOrder);

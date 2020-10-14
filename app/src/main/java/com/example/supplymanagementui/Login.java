@@ -43,6 +43,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 MainActivity.loggedIn = true;
                 Intent intent = new Intent(Login.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                finish();
                 startActivity(intent);
 
             }
