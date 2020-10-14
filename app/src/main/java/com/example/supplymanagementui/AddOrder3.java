@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,29 @@ public class AddOrder3 extends AppCompatActivity {
         edtTxtTotal = findViewById(R.id.edtTxtTotal);
 
         btnSave = findViewById(R.id.btnSave);
+
+
+
+
+        String address;
+        String date;
+        String req;
+        String material;
+        String supplier;
+
+        address = intent.getStringExtra("address");
+        date = intent.getStringExtra("date");
+        req = intent.getStringExtra("req");
+        material = intent.getStringExtra("material");
+        supplier = intent.getStringExtra("supplier");
+
+
+        Log.d("data","address"+address);
+        Log.d("data","date"+date);
+        Log.d("data","req"+req);
+        Log.d("data","material"+material);
+        Log.d("data","supplier"+supplier);
+
 
 
 

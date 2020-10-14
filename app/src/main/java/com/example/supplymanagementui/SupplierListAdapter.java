@@ -60,6 +60,10 @@ public class SupplierListAdapter extends BaseAdapter implements Filterable {
                 Log.d("Data","material "+addOrderModel.getMaterial());
                 Intent intent = new Intent(c, AddOrder3.class);
                 intent.putExtra("supplier", originalArray.get(position).getName());
+                intent.putExtra("address", addOrderModel.getAddress());
+                intent.putExtra("date", addOrderModel.getDate());
+                intent.putExtra("req", addOrderModel.getReq());
+                intent.putExtra("material", addOrderModel.getMaterial());
                 c.startActivity(intent);
 
             }
