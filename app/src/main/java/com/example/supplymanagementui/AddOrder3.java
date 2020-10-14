@@ -95,7 +95,15 @@ public class AddOrder3 extends AppCompatActivity {
                         edtTxtTotal.setError("Please provide Total");
                         edtTxtTotal.requestFocus();
                     }else{
-                        Toast.makeText(AddOrder3.this, "Saved", Toast.LENGTH_SHORT).show();
+                        Float qty;
+                        Float untPrice;
+                        Float tot;
+                        qty = new Float(quantity) ;
+                        untPrice = new Float(unitPrice) ;
+                        tot = new Float(total) ;
+
+                        jsonParse(address,date,req, material,supplier,qty, untPrice, tot);
+
                     }
                 //validate data end
             }
@@ -115,14 +123,14 @@ public class AddOrder3 extends AppCompatActivity {
 
 
 
-    private void jsonParse(String user,String pass){
+    private void jsonParse(String address,String date,String req,String material,String supId,Float qty,Float uprice,Float total){
         final ProgressDialog progressDialog = new ProgressDialog(AddOrder3.this);
         progressDialog.setTitle("Loading");
         progressDialog.setMessage("");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String url = "http://192.168.8.167:5000/user/"+user+"/"+pass;
+        String url = "http://192.168.8.167:5000/order/"+address+"/"+date+"/"+req+"/"+material+"/"+supId+"/"+qty+"/"+uprice+"/"+total;
         Log.d(TAG,"JSON URL"+url);
         JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -140,6 +148,7 @@ public class AddOrder3 extends AppCompatActivity {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 finish();
                                 startActivity(intent);
+                                Toast.makeText(AddOrder3.this, "Saved", Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(AddOrder3.this, "Login failed", Toast.LENGTH_SHORT).show();
                             }
