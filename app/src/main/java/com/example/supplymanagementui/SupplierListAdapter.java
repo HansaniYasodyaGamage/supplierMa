@@ -1,6 +1,7 @@
 package com.example.supplymanagementui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +50,9 @@ public class SupplierListAdapter extends BaseAdapter implements Filterable {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(c, SelectASalon.class);
-//                intent.putExtra("district", originalArray.get(position).getName());
-//                intent.putExtra("type", "CUSTOMER");
-//                c.startActivity(intent);
-                Toast.makeText(c, originalArray.get(position).getName() + " was clicked", Toast.LENGTH_SHORT).show();
-//                ((Activity) c).finish();
+                Intent intent = new Intent(c, AddOrder3.class);
+                intent.putExtra("supplier", originalArray.get(position).getName());
+                c.startActivity(intent);
 
             }
         });

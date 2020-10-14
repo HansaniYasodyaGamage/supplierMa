@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SupplyManagementUI">
-        <activity android:name=".AddOrder2"></activity>
+        <activity android:name=".AddOrder3"></activity>
+        <activity android:name=".AddOrder2" />
         <activity
             android:name=".AddOrder"
-            android:label="Add Order"></activity>
+            android:label="Add Order" />
         <activity
             android:name=".Login"
             android:configChanges="orientation|keyboardHidden|screenSize"
