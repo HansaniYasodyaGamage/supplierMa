@@ -2,6 +2,7 @@ package com.example.supplymanagementui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,15 @@ public class SupplierListAdapter extends BaseAdapter implements Filterable {
     ///filter
     CustomFilter cs;
     ///filter
+    AddOrderModel addOrderModel;
 
 
 
-    public SupplierListAdapter(Context c, ArrayList<Supplier> originalArray){
+    public SupplierListAdapter(Context c, ArrayList<Supplier> originalArray,AddOrderModel addOrderModel){
         this.c = c;
         this.originalArray = originalArray;
         this.tmpArray = originalArray;
+        this.addOrderModel = addOrderModel;
     }
 
 
@@ -50,6 +53,11 @@ public class SupplierListAdapter extends BaseAdapter implements Filterable {
             @Override
             public void onClick(View v) {
 
+
+                Log.d("Data","Address "+addOrderModel.getAddress());
+                Log.d("Data","date "+addOrderModel.getDate());
+                Log.d("Data","req "+addOrderModel.getReq());
+                Log.d("Data","material "+addOrderModel.getMaterial());
                 Intent intent = new Intent(c, AddOrder3.class);
                 intent.putExtra("supplier", originalArray.get(position).getName());
                 c.startActivity(intent);

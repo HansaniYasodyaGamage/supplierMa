@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
 
 public class AddOrder extends AppCompatActivity {
 
@@ -22,6 +25,8 @@ public class AddOrder extends AppCompatActivity {
     String req;
     String material;
 
+
+    private RequestQueue loginQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +66,11 @@ public class AddOrder extends AppCompatActivity {
                     edtTxtMaterial.requestFocus();
                 }else{
                     Intent intent = new Intent(AddOrder.this, AddOrder2.class);
+                    intent.putExtra("address",address);
+                    intent.putExtra("date",date);
+                    intent.putExtra("req",req);
+                    intent.putExtra("material",material);
+                    Toast.makeText(AddOrder.this, "Done", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
 

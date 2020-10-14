@@ -2,6 +2,7 @@ package com.example.supplymanagementui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +31,20 @@ public class AddOrder2 extends AppCompatActivity implements TextWatcher {
         searchSuppliers.addTextChangedListener(this);
 
 
+        Intent intent = getIntent();
+
+        String address;
+        String date;
+        String req;
+        String material;
+
+        address = intent.getStringExtra("address");
+        date = intent.getStringExtra("date");
+        req = intent.getStringExtra("req");
+        material = intent.getStringExtra("material");
+
+
+
         myList = new ArrayList<>();
         myList.add(new Supplier("Supplier 01"));
         myList.add(new Supplier("Supplier 02"));
@@ -48,10 +63,10 @@ public class AddOrder2 extends AppCompatActivity implements TextWatcher {
         myList.add(new Supplier("Supplier 15"));
         myList.add(new Supplier("Supplier 16"));
 
+        AddOrderModel addOModel = new AddOrderModel(address,date,req,material);
 
 
-
-        myAdapter = new SupplierListAdapter(AddOrder2.this, myList);
+        myAdapter = new SupplierListAdapter(AddOrder2.this, myList,addOModel);
 
         supplierList.setAdapter(myAdapter);
 
