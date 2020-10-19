@@ -99,8 +99,8 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("");
         progressDialog.setCancelable(false);
         progressDialog.show();
-
-        String url = "http://192.168.8.167:5000/user/"+user+"/"+pass;
+        //TODO Change ip here
+        String url = "http://192.168.8.180:5000/user/"+user+"/"+pass;
         Log.d(TAG,"JSON URL"+url);
         JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

@@ -129,8 +129,8 @@ public class AddOrder3 extends AppCompatActivity {
         progressDialog.setMessage("");
         progressDialog.setCancelable(false);
         progressDialog.show();
-
-        String url = "http://192.168.8.167:5000/order/"+address+"/"+date+"/"+req+"/"+material+"/"+supId+"/"+qty+"/"+uprice+"/"+total;
+        //TODO Change ip here
+        String url = "http://192.168.8.180:5000/order/"+address+"/"+date+"/"+req+"/"+material+"/"+supId+"/"+qty+"/"+uprice+"/"+total;
         Log.d(TAG,"JSON URL"+url);
         JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
